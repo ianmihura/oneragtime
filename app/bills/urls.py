@@ -6,6 +6,6 @@ from . import views
 
 urlpatterns = [
     path('', views.BillListAPIView.as_view(), name='bill-list'),
-    path('investor/<int:pk>/', views.BillInvetsorAPIView.as_view(), name='bill-investor-list'),
+    path('create-all/', views.BillCreateAPIView.as_view(), name='bill-create'),
     path('<int:pk>/', views.BillDetailAPIView.as_view(), name='bill-detail'),
 ]

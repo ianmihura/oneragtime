@@ -24,7 +24,7 @@ def main(csv_file, model, json_file, id):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Parse plain csv file to json fixture')
-    parser.add_argument('app', type=str, help='will look for fixture inside this drf app (name also used for csv & json files)')
+    parser.add_argument('app', type=str, help='will look for csv inside fixture folder of this drf app (name also used for model & output json file)')
     parser.add_argument('-id', type=str, help='id / primary key of row (default: id)', default='id')
     args = parser.parse_args()
 

@@ -16,9 +16,9 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('investor_id', models.IntegerField()),
-                ('investment_id', models.IntegerField()),
-                ('fees_amount', models.IntegerField()),
-                ('date_added', models.DateField()),
+                ('investment_id', models.IntegerField(blank=True, null=True)),
+                ('fees_amount', models.DecimalField(max_digits=19, decimal_places=2)),
+                ('date_added', models.DateTimeField()),
                 ('fees_type', models.CharField(max_length=10)),
             ],
         ),
