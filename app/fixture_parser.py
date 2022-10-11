@@ -13,22 +13,25 @@ def get_fixture_field(obj, id, model):
 
 
 def main(csv_file, model, json_file, id):
-    investors_file = csv.DictReader(open(csv_file, 'r', encoding='utf-8'))
-    fixture = [get_fixture_field(x, id, model) for x in investors_file]
-    with open(json_file, 'w') as file:
-        json.dump(fixture, file)
+    csv_path = Path(csv_file)
+    csv_file = open(csv_path, 'r', encoding='utf-8')
+    csv_dict = csv.DictReader(csv_file)
+    fixture = [get_fixture_field(x, id, model) for x in csv_dict]
+
+    json_path = Path(json_file)
+    json_path.write_text(json.dumps(fixture))
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Parse plain csv file to json fixture')
-    parser.add_argument('csv_file', type=str, help='csv file to convert')
-    parser.add_argument('model', type=str, help='django model to apply')
-    parser.add_argument('-json_file', type=str, help='destination json file (default: same file name as csv)')
+    parser.add_argument('app', type=str, help='will look for fixture inside this drf app (name also used for csv & json files)')
     parser.add_argument('-id', type=str, help='id / primary key of row (default: id)', default='id')
     args = parser.parse_args()
 
-    model = f'{args.model}.{args.model}'
-    json_file = args.json_file or "." + args.csv_file.split('.')[-2].replace('\\', '/') + ".json"
+    app = args.app
+    model = f'{app}.{app}'
+    csv_file = f'{app}/fixtures/{app}.csv'
+    json_file = f'{app}/fixtures/{app}.json'
 
-    main(args.csv_file, model, json_file, args.id)
+    main(csv_file, model, json_file, args.id)
 

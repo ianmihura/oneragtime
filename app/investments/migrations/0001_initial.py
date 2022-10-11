@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('startup_name', models.CharField(max_length=60)),
                 ('invested_amount', models.IntegerField()),
                 ('percentage_fees', models.IntegerField()),
-                ('date_added', models.DateField()),
+                ('date_added', models.DateTimeField()),
                 ('fees_type', models.CharField(max_length=10)),
             ],
         ),
