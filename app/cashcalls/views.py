@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from bills.models import Bills
 from investors.models import Investors
 from .models import Cashcalls
-from .serializers import CashcallSerializer
+from .serializers import CashcallSerializer, CashcallStatuserializer
 
 
 class CashcallListAPIView(generics.ListAPIView):
@@ -19,12 +19,9 @@ class CashcallDetailAPIView(generics.RetrieveAPIView):
     serializer_class = CashcallSerializer
 
 
-class CashcallStatusAPIView(generics.RetrieveAPIView):
+class CashcallStatusAPIView(generics.RetrieveUpdateAPIView):
     queryset = Cashcalls.objects.all()
-    serializer_class = CashcallSerializer
-
-    # TODO get: return only status field
-    # TODO update: update status field
+    serializer_class = CashcallStatuserializer
 
 
 class CashcallCreateAPIView(generics.CreateAPIView):

@@ -9,8 +9,5 @@ class Bills(models.Model):
     fees_type = models.CharField(max_length=10)
 
 
-# fk investor_id
-# fk investment_id
-
 # id,investor_id,investment_id,fees_amount,date_added,fees_type
 # 1,,,0,,

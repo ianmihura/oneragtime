@@ -28,13 +28,21 @@ This script is already prepared in the file client.py as
 
 ```python client.py create-bills```
 
-# Create Bills
+# Create Cashcall
 
 To create Cashcall for specific investor, you must execute a POST request to /api/cashcalls/create/<investor_id>
 
 This script is already prepared in the file client.py as
 
 ```python client.py create-cashcall -investor_id <investor_id>```
+
+# Update Cashcall
+
+To update the status of a Cashcall, you must execute a PUT request to /api/cashcalls/<investor_id>/status with the payload {"invoice_status":"new_status"}
+
+This script is already prepared in the file client.py as
+
+```python client.py update-cashcall -cashcall_id <cashcall_id> -status <status>```
 
 # TODO
 

@@ -10,8 +10,6 @@ class CashcallSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cashcalls
         fields = [
-            # TODO 'bills',
-            # TODO 'investor', 1-1
             'pk',
             'total_amount',
             'credit',
@@ -19,3 +17,12 @@ class CashcallSerializer(serializers.ModelSerializer):
             'date_added',
             'invoice_status',
         ]
+
+
+class CashcallStatuserializer(serializers.ModelSerializer):
+    invoice_status = serializers.CharField(
+        validators=[ValueAllowedValidator(['valid', 'sent', 'paid', 'overdue'])])
+
+    class Meta:
+        model = Cashcalls
+        fields = ['pk', 'invoice_status']

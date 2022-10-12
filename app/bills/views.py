@@ -103,8 +103,6 @@ class BillInvestorAPIView(generics.ListAPIView):
     serializer_class = BillSerializer
 
     def get(self, request, *args, **kwargs):
-        queryset = Bills.objects.filter(investor_id=kwargs['pk'])
+        queryset = Bills.objects.filter(investor_id=kwargs['investor_id'])
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
-
-    # TODO post (empty payload): create cashcall for given group of bills
