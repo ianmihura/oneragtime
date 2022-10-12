@@ -27,6 +27,9 @@ class BillSerializer(serializers.ModelSerializer):
         ]
 
     def get_investment_url(self, obj):
+        """
+        Custom url: checks if investment_id is not None (for example: membership bills)
+        """
         request = self.context.get('request')
         if request is None or obj.investment_id is None:
             return None

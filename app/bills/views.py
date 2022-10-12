@@ -10,34 +10,48 @@ from .serializers import BillSerializer
 
 
 class BillListAPIView(generics.ListAPIView):
+    """
+    List all bills
+    """
     queryset = Bills.objects.all()
     serializer_class = BillSerializer
 
 
 class BillCreateAPIView(generics.CreateAPIView):
+    """
+    Create bills for an investor_id
+    """
     queryset = Bills.objects.all()
     serializer_class = BillSerializer
 
     def get_investment_bill(self, investment):
+        """
+        Returns bill dict based on investment fees
+        Used to create bill with BillSerializer
+        """
+        april_2019 = datetime(year=2019, month=4, day=1)
+        # tm_yday_percentage is % of year that has passed, at time of investment
         tm_yday_percentage = (
             365 - investment.date_added.timetuple().tm_yday) / 365
+        # base_fee is fee * invested_amount
         base_fee = (investment.percentage_fees / 100) * \
             investment.invested_amount
 
         if investment.fees_type == 'upfront':
             # Upfront payment will be payed this year
+            # Other years are already filtered out
             fees_amount = base_fee * 5
 
-        elif investment.date_added.year < 2019:  # TODO april
+        elif investment.date_added.replace(tzinfo=None) < april_2019:
             # Yearly payment based on pre-2019
             if investment.date_added.year == datetime.now().year:
-                # First year
+                # First year (won't happen)
                 fees_amount = base_fee * tm_yday_percentage
             else:
                 # Other years
                 fees_amount = base_fee
 
-        elif investment.date_added.year >= 2019:  # TODO april
+        elif investment.date_added.replace(tzinfo=None) >= april_2019:
             # Yearly payment based on post-2019
             if investment.date_added.year == datetime.now().year:
                 # First year
@@ -67,6 +81,10 @@ class BillCreateAPIView(generics.CreateAPIView):
         }
 
     def get_investor_bill(self, investor):
+        """
+        Returns bill dict based on investor membership
+        Used to create bill with BillSerializer
+        """
         return {
             "investor_id": investor.id,
             "investment_id": None,
@@ -76,6 +94,11 @@ class BillCreateAPIView(generics.CreateAPIView):
         }
 
     def investor_is_exempt(self, id):
+        """
+        Returns True if investor is exempt of membership fee in current year
+        (given they invested over 50_000)
+        Returns False otherwise
+        """
         investors = Investments.objects.all().values('investor_id').annotate(
             total=Sum('invested_amount')).filter(
             date_added__gte=datetime.now().replace(month=1, day=1))
@@ -85,13 +108,17 @@ class BillCreateAPIView(generics.CreateAPIView):
             return False
 
     def post(self, request, *args, **kwargs):
+        # get investment bills (yearly & upfront)
         data = [self.get_investment_bill(x) for x in Investments.objects.all()
                 if not (x.date_added.year < datetime.now().year and x.fees_type == 'upfront')]
 
+        # get investor bills (membership fees)
         data = data + [self.get_investor_bill(x) for x in Investors.objects.all()
                        if not self.investor_is_exempt(x.id)]
 
         serializer = self.get_serializer(data=data, many=True)
+
+        # default code of generic view
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
@@ -99,6 +126,9 @@ class BillCreateAPIView(generics.CreateAPIView):
 
 
 class BillInvestorAPIView(generics.ListAPIView):
+    """
+    Filters bills for an investor_id
+    """
     queryset = Bills.objects.all()
     serializer_class = BillSerializer
 

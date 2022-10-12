@@ -14,7 +14,6 @@ class InvestmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Investments
         fields = [
-            # 'bill', # 1-1
             'pk',
             'investor_id',
             'investor_url',

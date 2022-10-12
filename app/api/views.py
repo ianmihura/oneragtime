@@ -1,17 +1,16 @@
-from rest_framework.decorators import api_view
+from rest_framework.reverse import reverse
 from rest_framework.response import Response
+from rest_framework.decorators import api_view
 
-from investors.serializers import InvestorSerializer
 
-
-@api_view(["GET"])
-def api_home(request, *args, **kwargs):
+@api_view(['GET'])
+def api_root(request, format=None):
     """
-    test endpoint
+    List basic endpoints.
     """
-    serializer = InvestorSerializer(data=request.data)
-    if serializer.is_valid(raise_exception=True):
-        # instance = serializer.save()
-        print(serializer.data)
-        return Response(serializer.data)
-    return Response()
+    return Response({
+        "bill-list": reverse('bill-list', request=request),
+        "cashcall-list": reverse('cashcall-list', request=request),
+        "investment-list": reverse('investment-list', request=request),
+        "investor-list": reverse('investor-list', request=request),
+    })

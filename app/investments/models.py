@@ -1,5 +1,4 @@
 from django.db import models
-from investors.models import Investors
 
 
 class Investments(models.Model):

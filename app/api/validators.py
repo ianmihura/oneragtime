@@ -2,10 +2,14 @@ from rest_framework import serializers
 
 
 class ValueAllowedValidator:
-    """Validator that checks if a value is in an allowed array"""
+    """
+    Checks if value is one of allowed values
+    """
 
     def __init__(self, allowed):
-        """allowed: List of allowed values"""
+        """
+        self.allowed: List of allowed values
+        """
         self.allowed = allowed
 
     def __call__(self, value):

@@ -46,9 +46,7 @@ This script is already prepared in the file client.py as
 
 # TODO
 
-- [ ] URLs for all object responses (hyperlinks)
 - [ ] Comment code
-- [ ] explorable endpoints (/api/)
 - [ ] style create bills (serializing logic)
 
 # Some changes made
