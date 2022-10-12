@@ -1,6 +1,16 @@
 # Initializing the project
 
-- [x] Execute `fixture_parser.py` if data is not already in json format
+- [ ] Create and activate virtual environment
+
+  ```python -m venv venv```
+  
+  ```.\venv\Scripts\activate```
+
+- [ ] Install dependencies
+
+  ```pip install -r .\requirements.txt```
+
+- [x] (done: data is already in json format) Execute `fixture_parser.py`
   
   ```python fixture_parser.py investors```
 
@@ -8,11 +18,11 @@
 
 - [ ] Create DB
 
-  ```python manage.py migrate```
+  ```python .\app\manage.py migrate```
 
-- [ ] Populate DB with fixtures
+- [ ] Populate DB with fixtures (should insert 120 objects)
 
-  ```python manage.py loaddata investors investments```
+  ```python .\app\manage.py loaddata investors investments```
 
 ## Launch server
 
