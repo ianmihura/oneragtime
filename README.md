@@ -69,3 +69,19 @@ This script is already prepared in the file client.py as
 - Some data was edited to encompass edge cases. In particular, 6 entries of the investments.csv file changed to year 2022 (current year).
 - Column 'IBAN' in cashcall.csv changed to 'credit', to respect investor type of payment in investors.csv 
 - Other minor typos to column names
+
+# Endpoints
+
+| DB Object    | Method   | Endpoint                           | Effect                                         |
+| ------------ | -------- | ---------------------------------- | ---------------------------------------------- |
+| Investors    | GET/POST | api/investors/                     | List all investors / Create new investor       |
+| Investors    | GET      | api/investors/<investor_id>        | Single investor detail                         |
+| Investements | GET/POST | api/investements/                  | List all investements / Create new investement |
+| Investements | GET      | api/investements/<investement_id>  | Single investement detail                      |
+| Bills        | GET      | api/bills/                         | List all bills                                 |
+| Bills        | POST     | api/bills/create-all               | Create all bills                               |
+| Bills        | GET      | api/bills/investor/<investor_id>   | Filters bills for an investor_id               |
+| Cashcalls    | GET      | api/cashcalls                      | List all cashcalls                             |
+| Cashcalls    | GET      | api/cashcalls/<investor_id>        | Single cashcall detal                          |
+| Cashcalls    | POST     | api/cashcalls/create/<investor_id> | Create single cashcall for an investor_id      |
+| Cashcalls    | GET/PUT  | api/cashcalls/<investor_id>/status | Cashcall status / Update invoice_status        |
