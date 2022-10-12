@@ -16,7 +16,7 @@ class InvestmentSerializer(serializers.ModelSerializer):
         fields = [
             # 'bill', # 1-1
             'pk',
-            'investor_id',  # fk
+            'investor_id',
             'investor_url',
             'startup_name',
             'invested_amount',

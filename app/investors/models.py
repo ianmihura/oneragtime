@@ -3,10 +3,10 @@ from django.db import models
 
 class Investors(models.Model):
     name = models.CharField(max_length=60)
-    address = models.TextField(blank=True, null=True)
-    credit = models.TextField(blank=True, null=True)
-    phone = models.CharField(max_length=20, blank=True, null=True)
-    email = models.EmailField(blank=True, null=True)
+    address = models.TextField()
+    credit = models.TextField()
+    phone = models.CharField(max_length=20)
+    email = models.EmailField()
 
 
 # id,name,adress,credit,phone,email

@@ -42,7 +42,7 @@ class CashcallCreateAPIView(generics.CreateAPIView):
         }
 
     def post(self, request, *args, **kwargs):
-        data = self.get_cashcall(kwargs['pk'])
+        data = self.get_cashcall(kwargs['investor_id'])
         serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)

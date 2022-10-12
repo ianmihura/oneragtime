@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True,
                  primary_key=True, serialize=False, verbose_name='ID')),
                 ('total_amount', models.IntegerField()),
-                ('credit', models.CharField(max_length=60)),
+                ('credit', models.TextField()),
                 ('email_send', models.EmailField(max_length=254)),
                 ('date_added', models.DateTimeField()),
                 ('invoice_status', models.CharField(max_length=10)),
