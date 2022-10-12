@@ -1,6 +1,6 @@
 from django.db import models
 
-# Create your models here.
+
 class Bills(models.Model):
     investor_id = models.IntegerField()
     investment_id = models.IntegerField(blank=True, null=True)
@@ -11,7 +11,6 @@ class Bills(models.Model):
 
 # fk investor_id
 # fk investment_id
-# fees_type = [upfront, yearly]
 
 # id,investor_id,investment_id,fees_amount,date_added,fees_type
 # 1,,,0,,

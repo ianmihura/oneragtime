@@ -14,11 +14,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Investments',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('total_amount', models.IntegerField()),
-                ('IBAN', models.CharField(max_length=60)),
+                ('credit', models.CharField(max_length=60)),
                 ('email_send', models.EmailField(max_length=254)),
-                ('date_added', models.DateField()),
+                ('date_added', models.DateTimeField()),
                 ('invoice_status', models.CharField(max_length=10)),
             ],
         ),

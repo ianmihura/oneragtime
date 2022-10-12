@@ -26,19 +26,25 @@ To create all Bills based on Investments data, you must execute a POST request t
 
 This script is already prepared in the file client.py as
 
-```python client.py create-all```
+```python client.py create-bills```
+
+# Create Bills
+
+To create Cashcall for specific investor, you must execute a POST request to /api/cashcalls/create/<investor_id>
+
+This script is already prepared in the file client.py as
+
+```python client.py create-cashcall -investor_id <investor_id>```
 
 # TODO
 
 - [ ] URLs for all object responses (hyperlinks)
-- [ ] create-all Bills
 - [ ] Comment code
-- [ ] investment fee_type -> data type
-- [ ] bill fee_type -> data type
-- [ ] cashcall status -> data type
 - [ ] explorable endpoints (/api/)
-- [ ] style create bills
+- [ ] style create bills (serializing logic)
 
-# Other comments
+# Some changes made
 
-Some data was edited to encompass edge cases. In particular, 6 entries of the investments.csv file changed to year 2022 (current year).
+- Some data was edited to encompass edge cases. In particular, 6 entries of the investments.csv file changed to year 2022 (current year).
+- Column 'IBAN' in cashcall.csv changed to 'credit', to respect investor type of payment in investors.csv 
+- Other minor typos to column names
